@@ -4,10 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-    <h1>Rock Paper Scissors</h1>
+    <h1>Rock, Paper, Scissors, Shoot!</h1>
+    <div id="scoreboard" class="container flex column">
+        <div id="contenders" class="flex">
+            <div class="contender">
+                <h2>Player: <span id="player-scoreboard">0</span></h2>
+            </div>
+            <div class="contender">
+                <h2>Computer: <span id="computer-scoreboard">0</span></h2>
+            </div>
+        </div>
+        <div id="contender-choices" class="flex">
+            <div id="player-choice-container"></div>
+            <div id="computer-choice-container"></div>
+        </div>
+        
+    </div>
+    <div class="container">
+        <h3 id="comment"></h3>
+    </div>
+    <div class="container">
+        <button id="rock" class="choice-btn"></button>
+        <button id="paper" class="choice-btn"></button>
+        <button id="scissors" class="choice-btn"></button>
+    </div>
+    <div class="container">
+        <button id="reset-btn">Play again!</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,13 +1,14 @@
 const choices = ['rock', 'paper', 'scissors'];
-const playerScoreboard = document.getElementById('player-scoreboard');
-const playerChoiceContainer = document.getElementById('player-choice-container');
-const computerScoreboard = document.getElementById('computer-scoreboard');
-const computerChoiceContainer = document.getElementById('computer-choice-container');
-const comment = document.getElementById('comment');
-const resetBtn = document.getElementById('reset-btn');
-const rock = document.getElementById('rock');
-const paper = document.getElementById('paper');
-const scissors = document.getElementById('scissors');
+const playerScoreboard = document.querySelector('#player-scoreboard');
+const playerChoiceContainer = document.querySelector('#player-choice-container');
+const computerScoreboard = document.querySelector('#computer-scoreboard');
+const computerChoiceContainer = document.querySelector('#computer-choice-container');
+const comment = document.querySelector('#comment');
+const resetBtn = document.querySelector('#reset-btn');
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const buttons = document.querySelectorAll('button');
 
 let playerScore = 0;
 let computerScore = 0;
@@ -38,6 +39,25 @@ function playRound(p, c) {
     return roundWinner;
 }
 
+function showChoiceImg(contenderChoice, img, choiceContainer) {
+    switch (contenderChoice) {
+        case 'rock':
+            img.src = 'images/rock.svg';
+            choiceContainer.appendChild(img);
+            break;
+    
+        case 'paper':
+            img.src = 'images/paper.svg';
+            choiceContainer.appendChild(img);
+            break;
+    
+        case 'scissors':
+            img.src = 'images/scissors.svg';
+            choiceContainer.appendChild(img);
+            break;
+    }
+}
+
 function updateScoreboard() {
     playerScoreboard.textContent = playerScore;
     computerScoreboard.textContent = computerScore;
@@ -49,17 +69,17 @@ function toggleBtn(btn) {
 }
 
 function endGame() {
-    if (playerScore < 5 && computerScore < 5) {
-        return;
-    } else {
-        toggleBtn(resetBtn);
-        toggleBtn(rock);
-        toggleBtn(paper);
-        toggleBtn(scissors);
+    toggleBtn(resetBtn);
+    toggleBtn(rock);
+    toggleBtn(paper);
+    toggleBtn(scissors);
 
-        let gameWinner = null;
-        gameWinner = playerScore > computerScore ? 'You win the game!' : 'Better luck next time!';
-        comment.textContent = gameWinner;
+    let gameWinner = null;
+    gameWinner = playerScore > computerScore ? 'You win the game!' : 'Better luck next time!';
+    comment.textContent = gameWinner;
+
+    for (const button of buttons) {
+        button.style.transform = 'initial';
     }
 }
 
@@ -77,24 +97,34 @@ function resetImgs() {
 }
 
 function resetGame() {
-    resetBtn.addEventListener('click', event => {
-        resetScores();
-        resetImgs();
+    resetBtn.addEventListener('pointerup', e => {
+        if (!resetBtn.disabled) {
+            resetScores();
+            resetImgs();
 
-        comment.textContent = 'Who will win this game?';
+            comment.textContent = 'Who will win this game?';
 
-        toggleBtn(resetBtn);
-        toggleBtn(rock);
-        toggleBtn(paper);
-        toggleBtn(scissors);
+            toggleBtn(rock);
+            toggleBtn(paper);
+            toggleBtn(scissors);
+            toggleBtn(resetBtn);
+
+            for (const button of buttons) {
+                button.style.transform = 'initial';
+            }
+        }
     })
 }
 
 function startRound() {
     document.querySelectorAll('.choice-btn').forEach(choice => {
-        choice.addEventListener('click', event => {
+        choice.addEventListener('pointerup', e => {
+            if (choice.disabled) {
+                return;
+            }
+
             let pChoice = null;
-            pChoice = event.target.id;
+            pChoice = e.target.id;
 
             let cChoice = null;
             cChoice = computerPlay();
@@ -103,29 +133,28 @@ function startRound() {
             showChoiceImg(pChoice, playerImg, playerChoiceContainer);
             showChoiceImg(cChoice, computerImg, computerChoiceContainer);
             updateScoreboard();
+
+        if (playerScore < 5 && computerScore < 5) {
+            return;
+        } else {
             endGame();
+        }
         })
     })
 }
 
-function showChoiceImg(contenderChoice, img, choiceContainer) {
+for (const button of buttons) {
+    button.addEventListener('pointerenter', e => {
+        if (!button.disabled) {
+            button.style.transform = 'scale(1.1)';
+        }
+    })
 
-    switch (contenderChoice) {
-        case 'rock':
-            img.src = 'images/rock.svg';
-            choiceContainer.appendChild(img);
-            break;
-    
-        case 'paper':
-            img.src = 'images/paper.svg';
-            choiceContainer.appendChild(img);
-            break;
-    
-        case 'scissors':
-            img.src = 'images/scissors.svg';
-            choiceContainer.appendChild(img);
-            break;
-    }
+    button.addEventListener('pointerleave', e => {
+        if (!button.disabled) {
+            button.style.transform = 'initial';
+        }
+    })
 }
 
 resetBtn.disabled = true;

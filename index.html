@@ -8,33 +8,43 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-    <h1>Rock, Paper, Scissors, Shoot!</h1>
-    <div id="scoreboard" class="container flex column">
-        <div id="contenders" class="flex">
-            <div class="contender">
-                <h2>Player: <span id="player-scoreboard">0</span></h2>
+    <header>
+        <h1>Rock, Paper, Scissors, Shoot!</h1>
+    </header>
+
+    <main>
+        <section id="scoreboard" class="container">
+            <div id="contenders" class="flex">
+                <div class="contender">
+                    <h2>Player: <span id="player-scoreboard">0</span></h2>
+                </div>
+                <div class="contender">
+                    <h2>Computer: <span id="computer-scoreboard">0</span></h2>
+                </div>
             </div>
-            <div class="contender">
-                <h2>Computer: <span id="computer-scoreboard">0</span></h2>
+            <div id="contender-choices" class="flex">
+                <div id="player-choice-container"></div>
+                <div id="computer-choice-container"></div>
             </div>
-        </div>
-        <div id="contender-choices" class="flex">
-            <div id="player-choice-container"></div>
-            <div id="computer-choice-container"></div>
-        </div>
+        </section>
         
-    </div>
-    <div class="container">
-        <h3 id="comment"></h3>
-    </div>
-    <div class="container">
-        <button id="rock" class="choice-btn"></button>
-        <button id="paper" class="choice-btn"></button>
-        <button id="scissors" class="choice-btn"></button>
-    </div>
-    <div class="container">
-        <button id="reset-btn">Play again!</button>
-    </div>
+        <section class="container">
+            <h3 id="comment">Try your luck!</h3>
+        </section>
+
+        <section class="container">
+            <button id="rock" class="choice-btn" aria-label="rock"></button>
+            <button id="paper" class="choice-btn" aria-label="paper"></button>
+            <button id="scissors" class="choice-btn" aria-label="scissors"></button>
+            <br>
+            <button id="reset-btn" aria-label="Play again">Play again!</button>
+        </section>
+    </main>
+
+    <footer class="container">
+        <div id="copyright">© 2022 <a href="https://github.com/janetthieu">Janet Thieu</a></div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

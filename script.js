@@ -65,7 +65,7 @@ function updateScoreboard() {
 }
 
 function toggleBtn(btn) {
-    btn.disabled === false ? btn.disabled = true : btn.disabled = false;
+    btn.disabled = !btn.disabled;
 }
 
 function endGame() {
